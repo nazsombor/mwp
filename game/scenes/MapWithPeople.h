@@ -7,6 +7,7 @@
 
 
 #include "Scene.h"
+#include <deque>
 
 struct Vertex {
     float x, y;

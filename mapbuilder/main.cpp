@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Osm.h"
-#include "Map.h"
+#include "MapTiles.h"
 #include "HighwayGraph.h"
 #include "People.h"
 
@@ -13,11 +13,9 @@ int main(int argc, char **argv) {
     Osm osm;
     osm.read(argv[1]);
 
-    std::cout << "Sorting osm" << std::endl;
-    Map map{osm};
-
     std::cout << "Writing tile images" << std::endl;
-    map.write();
+    MapTiles map{osm};
+    //map.write();
 
     std::cout << "Creating highway graph" << std::endl;
     HighwayGraph graph{osm};

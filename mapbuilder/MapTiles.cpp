@@ -2,7 +2,7 @@
 // Created by abris on 4/30/24.
 //
 
-#include "Map.h"
+#include "MapTiles.h"
 
 #include <utility>
 
@@ -46,8 +46,8 @@ Tiles::Tiles(int tileWidth, int tileHeight, double width, double height) : tileW
     }
 }
 
-Map::Map(Osm &osm) : regions(std::min((int) osm.width, 10000), std::min((int) osm.height, 10000), osm.width,
-                             osm.height) {
+MapTiles::MapTiles(Osm &osm) : regions(std::min((int) osm.width, 10000), std::min((int) osm.height, 10000), osm.width,
+                                       osm.height) {
     this->osm = &osm;
 
     lineStrip("admin_level", "2", 0, 0, 0, 5);
@@ -61,8 +61,8 @@ Map::Map(Osm &osm) : regions(std::min((int) osm.width, 10000), std::min((int) os
     area("building:levels", 217, 208, 201, 207, 196, 187);
 }
 
-void Map::lineStrip(const std::string &key, unsigned short red, unsigned short green, unsigned short blue,
-                    double lineWidth) {
+void MapTiles::lineStrip(const std::string &key, unsigned short red, unsigned short green, unsigned short blue,
+                         double lineWidth) {
     std::vector<Way *> ways;
     osm->findAllWaysWithKey(key, ways);
     for (auto way: ways) {
@@ -80,8 +80,8 @@ void Map::lineStrip(const std::string &key, unsigned short red, unsigned short g
     }
 }
 
-void Map::lineStrip(const std::string &key, const std::string &value, unsigned short red, unsigned short green,
-                    unsigned short blue, double lineWidth) {
+void MapTiles::lineStrip(const std::string &key, const std::string &value, unsigned short red, unsigned short green,
+                         unsigned short blue, double lineWidth) {
     std::vector<Way *> ways;
     osm->findAllWaysWithTag(key, value, ways);
     for (auto way: ways) {
@@ -99,8 +99,8 @@ void Map::lineStrip(const std::string &key, const std::string &value, unsigned s
     }
 }
 
-void Map::area(const std::string &key, const std::string &value, unsigned short red, unsigned short green,
-               unsigned short blue) {
+void MapTiles::area(const std::string &key, const std::string &value, unsigned short red, unsigned short green,
+                    unsigned short blue) {
     std::vector<Way *> ways;
     osm->findAllWaysWithTag(key, value, ways);
     for (auto way: ways) {
@@ -116,9 +116,9 @@ void Map::area(const std::string &key, const std::string &value, unsigned short 
     }
 }
 
-void Map::area(const std::string &key, const std::string &value, unsigned short red, unsigned short green,
-               unsigned short blue, unsigned short redOutline, unsigned short greenOutline,
-               unsigned short blueOutline) {
+void MapTiles::area(const std::string &key, const std::string &value, unsigned short red, unsigned short green,
+                    unsigned short blue, unsigned short redOutline, unsigned short greenOutline,
+                    unsigned short blueOutline) {
     std::vector<Way *> ways;
     osm->findAllWaysWithTag(key, value, ways);
     for (auto way: ways) {
@@ -134,9 +134,9 @@ void Map::area(const std::string &key, const std::string &value, unsigned short 
     }
 }
 
-void Map::area(const std::string &key, unsigned short red, unsigned short green,
-               unsigned short blue, unsigned short redOutline, unsigned short greenOutline,
-               unsigned short blueOutline) {
+void MapTiles::area(const std::string &key, unsigned short red, unsigned short green,
+                    unsigned short blue, unsigned short redOutline, unsigned short greenOutline,
+                    unsigned short blueOutline) {
     std::vector<Way *> ways;
     osm->findAllWaysWithKey(key, ways);
     for (auto way: ways) {
@@ -154,7 +154,7 @@ void Map::area(const std::string &key, unsigned short red, unsigned short green,
 
 
 
-void Map::write() {
+void MapTiles::write() {
     int range = regions.regions.size() / 10;
 
     std::thread t1{writeTiles, &regions, 0, range};

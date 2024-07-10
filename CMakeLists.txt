@@ -3,6 +3,8 @@ project(mwp)
 
 set(CMAKE_CXX_STANDARD 23)
 
+add_subdirectory(test)
+
 add_executable(mwp game/main.cpp
         game/Game.cpp
         game/Game.h
@@ -21,8 +23,8 @@ add_executable(mapbuilder
         mapbuilder/main.cpp
         mapbuilder/Osm.cpp
         mapbuilder/Osm.h
-        mapbuilder/Map.cpp
-        mapbuilder/Map.h
+        mapbuilder/MapTiles.cpp
+        mapbuilder/MapTiles.h
         mapbuilder/HighwayGraph.cpp
         mapbuilder/HighwayGraph.h
         mapbuilder/People.cpp

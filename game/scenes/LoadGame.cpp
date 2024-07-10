@@ -26,7 +26,7 @@ void LoadGame::input(sf::Event &event) {
 
 void LoadGame::update() {
     if (loadFinished) {
-        nextScene = mwp;
+        nextScene = (Scene*) mwp;
     }
 }
 
@@ -57,6 +57,8 @@ void Game::read(LoadGame *loadGame, MapWithPeople *mwp) {
         input.read(reinterpret_cast<char *>(&b), sizeof b);
         mwp->edges.emplace_back(a, b);
     }
+
+    loadGame->loadFinished = true;
 }
 
 void Game::readSize(std::ifstream &file, size_t &size) {

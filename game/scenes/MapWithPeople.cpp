@@ -20,6 +20,18 @@ void MapWithPeople::update() {
 
 void MapWithPeople::render(sf::RenderWindow &window) {
     window.clear(sf::Color::White);
+    std::vector<std::vector<sf::Vertex>> v;
+
+    for (auto edge : edges) {
+        std::vector<sf::Vertex> vv;
+        vv.emplace_back(sf::Vector2f(vertices[edge.first].x, vertices[edge.first].y), sf::Color::Black);
+        vv.emplace_back(sf::Vector2f(vertices[edge.second].x, vertices[edge.second].y), sf::Color::Black);
+        v.push_back(vv);
+    }
+
+    for (auto vv : v) {
+        window.draw(&vv[0], vv.size(), sf::LineStrip);
+    }
 }
 
 void MapWithPeople::path(unsigned long a, unsigned long b, std::vector<unsigned long> &shortestPath) {

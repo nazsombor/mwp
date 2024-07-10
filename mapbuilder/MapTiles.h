@@ -2,8 +2,8 @@
 // Created by abris on 4/30/24.
 //
 
-#ifndef MWP_MAP_H
-#define MWP_MAP_H
+#ifndef MWP_MAPTILES_H
+#define MWP_MAPTILES_H
 
 
 #include "Osm.h"
@@ -85,12 +85,12 @@ public:
     void addArea(Multipolygon &area);
 };
 
-class Map {
+class MapTiles {
 public:
     Osm *osm;
     Tiles regions;
 
-    explicit Map(Osm &osm);
+    explicit MapTiles(Osm &osm);
 
     void write();
 
@@ -115,4 +115,4 @@ void writeTiles(Tiles *tiles, int from, int to);
 
 void writeTile(Tile *tile, int tileWidth, int tileHeight);
 
-#endif //MWP_MAP_H
+#endif //MWP_MAPTILES_H
