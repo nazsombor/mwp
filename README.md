@@ -38,6 +38,6 @@ mkdir <country name>
 ./mapbuilder <country>-latest.osm.pbf <country name>
 ```
 
-The map builder executable generates the map image tiles and the highway graph in `<country name>` folder.
+The map builder executable generates the map image tiles, the highway graph and the society file in `<country name>` folder.
 
 Use `./mwp` to run the game.
